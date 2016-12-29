@@ -2,7 +2,8 @@ version: "2"
 
 services:
   gitlab:
-    image: gitlab/gitlab-ce:latest
+    build:
+      context: ./gitlab-ce
     ports:
       - "10080:80"
       - "10443:443"
@@ -13,13 +14,19 @@ services:
       - data:/var/opt/gitlab
     environment:
       GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://localhost'
+        user['uid'] = 998
+        user['gid'] = 998
 
   redmine:
-    image: redmine:latest
+    build:
+      context: ./redmine
     ports:
       - "10081:3000"
     volumes:
       - redmine-files:/usr/src/redmine/files
+    volumes_from:
+      - gitlab
     environment:
       REDMINE_DB_POSTGRES: postgres
       REDMINE_DB_USERNAME: redmine
