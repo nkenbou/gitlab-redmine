@@ -19,6 +19,7 @@ services:
         user['uid'] = 998
         user['gid'] = 998
         gitlab_rails['time_zone'] = 'Asia/Tokyo'
+        gitlab_rails['gitlab_shell_ssh_port'] = 10022
 
   redmine:
     build:
