@@ -12,11 +12,13 @@ services:
       - config:/etc/gitlab
       - logs:/var/log/gitlab
       - data:/var/opt/gitlab
+      - /etc/localtime:/etc/localtime:ro
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://localhost'
         user['uid'] = 998
         user['gid'] = 998
+        gitlab_rails['time_zone'] = 'Asia/Tokyo'
 
   redmine:
     build:
