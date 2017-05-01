@@ -2,8 +2,7 @@ version: "2"
 
 services:
   gitlab:
-    build:
-      context: ./gitlab-ce
+    image: gitlab/gitlab-ce:latest
     ports:
       - "10080:80"
       - "10443:443"
@@ -22,14 +21,13 @@ services:
         gitlab_rails['gitlab_shell_ssh_port'] = 10022
 
   redmine:
-    build:
-      context: ./redmine
+    image: redmine:latest
     ports:
       - "10081:3000"
     volumes:
       - redmine-files:/usr/src/redmine/files
-    volumes_from:
-      - gitlab
+      - ./redmine-plugins:/usr/src/redmine/plugins
+      - ./git_repositories:/var/redmine/git_repositories
     environment:
       REDMINE_DB_POSTGRES: postgres
       REDMINE_DB_USERNAME: redmine

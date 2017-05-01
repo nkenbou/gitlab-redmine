@@ -1,0 +1,3 @@
+[submodule "redmine-plugins/redmine_github_hook"]
+	path = redmine-plugins/redmine_github_hook
+	url = git@github.com:koppen/redmine_github_hook.git
